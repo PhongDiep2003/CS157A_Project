@@ -1,6 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 import '../css/decks.css'
+import { useNavigate } from 'react-router-dom'
 const DeckRow = ({deckId, deckName, createdDate, isHeader}) => {
+  const navigate = useNavigate()
+  const [showMenu, setShowMenu] = useState(false)
   return (
     <div className='deckRowContainer'>
       {/* Deck Id */}
@@ -21,11 +24,20 @@ const DeckRow = ({deckId, deckName, createdDate, isHeader}) => {
       {/* Three dot */}
       <div>
         {!isHeader && 
-            <div className="threeDot" onClick={() => console.log('eg')}> 
-              <span/>
-              <span/>
-              <span/>
+          <div className="threeDotContainer" > 
+              <div className='threeDot' onClick={() => setShowMenu(prev => !prev)}>
+                <span/>
+                <span/>
+                <span/>
+              </div>
           </div>
+        }
+        {showMenu && 
+                    <div className="popupMenu">
+                        <button onClick={() => navigate('/home/editdecktitle')}>
+                          Edit Title
+                        </button>
+                    </div>
         }
       </div>
     </div>

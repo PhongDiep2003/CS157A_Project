@@ -1,0 +1,51 @@
+.cardContainer {
+  background-color: white;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  width: 1200px;
+  height: 900px;
+  box-shadow: 7px 7px 10px 3px #24004628;
+  /* margin-left: 150px; */
+}
+.cardContainer div:nth-of-type(1) {
+  flex-grow: 12;
+}
+.cardContainer div:nth-of-type(2) {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cardContainer div:nth-of-type(2) button {
+  color: black;
+  border: none;
+}
+.switchsidebuttonclicked {
+  background-color: #D4D1D1;
+}
+.switchsidebuttonnotclicked {
+  background-color: white;
+}
+.frontCardContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.frontCardContainer h1 {
+  color: black;
+}
+
+.backCardContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+}
+.backCardContainer h1 {
+  color: black;
+}
+.backCardContainer div {
+  padding: 0px 40px 0px 40px;
+  height: 100%;
+}

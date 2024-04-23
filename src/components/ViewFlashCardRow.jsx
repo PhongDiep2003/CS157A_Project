@@ -1,6 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 import '../css/viewFlashCard.css'
+import { useNavigate } from 'react-router-dom'
 const ViewFlashCardRow = ({cardId, cardName, lastVisitDate, owner, createdDate, isHeader}) => {
+  const navigate = useNavigate()
+  const [showMenu, setShowMenu] = useState(false)
   return (
     <div className='flashcardRowContainer'>
       {/* Card Id */}
@@ -32,12 +35,27 @@ const ViewFlashCardRow = ({cardId, cardName, lastVisitDate, owner, createdDate, 
 
       {/* Three dot */}
       <div>
-        {!isHeader && 
-            <div className="threeDot" onClick={() => console.log('eg')}> 
-              <span/>
-              <span/>
-              <span/>
+      {!isHeader && 
+          <div className="threeDotContainer" > 
+              <div className='threeDot' onClick={() => setShowMenu(prev => !prev)}>
+                <span/>
+                <span/>
+                <span/>
+              </div>
           </div>
+        }
+        {showMenu && 
+                    <div className="popupMenu">
+                        <button onClick={() => navigate('/home/editcardtitle')}>
+                          Edit Title
+                        </button>
+                        <button onClick={() => navigate('/home/editcardfrontbody')}>
+                          Edit Front Body
+                        </button>
+                        <button onClick={() => navigate('/home/editcardbackbody')}>
+                          Edit Back Body
+                        </button>
+                    </div>
         }
       </div>
     </div>

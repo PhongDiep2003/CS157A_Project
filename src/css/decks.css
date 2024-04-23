@@ -30,6 +30,7 @@
   flex: 3;
 }
 .deckRowContainer div:nth-of-type(4) {
+  position: relative;
   flex: 3;
 }
 .deckRowContainer * {
@@ -37,17 +38,6 @@
   align-items: center;
 }
 
-.threeDot {
-  display: flex;
-  gap: 5px;
-}
-
-.threeDot span {
-  height: 5px;
-  width: 5px;
-  background-image: linear-gradient(to right , #333 , #233,#222,#122,#112,#111,#011,#001,#000);
-  border-radius: 50%;
-}
 
 .addDeckBtn {
   width: 50px;
@@ -67,3 +57,42 @@
 .addDeckBtn:hover {
   transform: scale(1.2);
 }
+.popupMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  width: 200px;
+  border: 1px solid black;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  justify-content: center;
+}
+.popupMenu button {
+  background-color: transparent;
+  border: none;
+  padding: 10px;
+  color: white;
+  display: flex;
+  position: relative;
+  gap: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+  color: black;
+  width: 100%;
+  
+}
+
+.popupMenu button:not(:active):hover {
+  background-color: #33A1FD;
+}
+
+.popupMenu button:focus,
+.popupMenu button:active {
+  outline: none;
+}
+
+
+
