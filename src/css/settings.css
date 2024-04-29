@@ -11,16 +11,17 @@
 
 .settingsContentContainer {
   height: 100%;
+  
 }
 
-.settingsContentContainer form {
+.updateForm {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 88%;
 }
 
-.settingsContentContainer form div {
+.updateForm div {
   display: flex;
   flex-direction: column;
 }

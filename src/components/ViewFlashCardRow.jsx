@@ -1,9 +1,27 @@
 import React, {useState} from 'react'
 import '../css/viewFlashCard.css'
 import { useNavigate } from 'react-router-dom'
-const ViewFlashCardRow = ({cardId, cardName, lastVisitDate, owner, createdDate, isHeader}) => {
+import axios from 'axios'
+import useFlashcardStorage from '../authStorage/flashcardStorage'
+const ViewFlashCardRow = ({cardId, cardName, createdDate, isHeader, deckID, backCard}) => {
   const navigate = useNavigate()
+  const removeFlashcard = useFlashcardStorage(state => state.removeFlashcard)
+  const date = new Date(createdDate);
+  // Use toLocaleDateString to format the date in the desired format
+  const options = { month: 'long', day: 'numeric', year: 'numeric' };
+  const formattedDate = date.toLocaleDateString('en-US', options);
   const [showMenu, setShowMenu] = useState(false)
+  const handleDeleteFlashcard = async () => {
+    try {
+      const result = await axios.delete(`http://localhost:3000/deleteFlashcard/${cardId}`)
+      if (result.data.success) {
+        removeFlashcard(cardId)
+        alert('Deleted flashcard successfully')
+      }
+    } catch(error) {
+      alert('Failed to delete flashcard')
+    }
+  }
   return (
     <div className='flashcardRowContainer'>
       {/* Card Id */}
@@ -16,21 +34,19 @@ const ViewFlashCardRow = ({cardId, cardName, lastVisitDate, owner, createdDate, 
         <p style={{'color': '#000000', 'fontSize': '1.2rem', 'fontWeight': '600'}}>{cardName}</p>
       </div>
 
-      {/* Last visit date */}
+      {/* Created Date */}
       <div>
-        <p style={{'color': '#000000', 'fontSize': '1.2rem', 'fontWeight': '600'}}>{lastVisitDate}</p>
+        <p style={{'color': '#000000', 'fontSize': '1.2rem', 'fontWeight': '600'}}>{isHeader ? createdDate : formattedDate}</p>
       </div>
 
       {/* Date */}
       <div>
-        <p style={{'color': '#000000', 'fontSize': '1.2rem', 'fontWeight': '600'}}>{createdDate}</p>
+        <p style={{'color': '#000000', 'fontSize': '1.2rem', 'fontWeight': '600'}}></p>
       </div>
 
       {/* Owner */}
       <div>
-        {isHeader ?
-          <p style={{'color': '#000000', 'fontSize': '1.2rem', 'fontWeight': '600'}}>Owner</p>
-          : <img src={owner} style={{'width': '40px', 'height': '40px', 'borderRadius': '50px'}}/>}
+        <p style={{'color': '#000000', 'fontSize': '1.2rem', 'fontWeight': '600'}}>{deckID}</p>
       </div>
 
       {/* Three dot */}
@@ -46,13 +62,13 @@ const ViewFlashCardRow = ({cardId, cardName, lastVisitDate, owner, createdDate, 
         }
         {showMenu && 
                     <div className="popupMenu">
-                        <button onClick={() => navigate('/home/editcardtitle')}>
-                          Edit Title
+                        <button onClick={handleDeleteFlashcard}>
+                          Delete Flashcard
                         </button>
-                        <button onClick={() => navigate('/home/editcardfrontbody')}>
+                        <button onClick={() => navigate('/home/editcardfrontbody', {state: {frontCard: cardName, cardId: cardId }})}>
                           Edit Front Body
                         </button>
-                        <button onClick={() => navigate('/home/editcardbackbody')}>
+                        <button onClick={() => navigate('/home/editcardbackbody', {state: {backCard: backCard, cardId: cardId }})}>
                           Edit Back Body
                         </button>
                     </div>

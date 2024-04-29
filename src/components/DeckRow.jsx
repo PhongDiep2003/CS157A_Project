@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import '../css/decks.css'
 import { useNavigate } from 'react-router-dom'
-const DeckRow = ({deckId, deckName, createdDate, isHeader}) => {
+const DeckRow = ({deckId, deckName, isHeader}) => {
   const navigate = useNavigate()
   const [showMenu, setShowMenu] = useState(false)
   return (
@@ -18,7 +18,7 @@ const DeckRow = ({deckId, deckName, createdDate, isHeader}) => {
 
       {/* Created Date */}
       <div>
-        <p style={{'color': '#000000', 'fontSize': '1.2rem', 'fontWeight': '600'}}>{createdDate}</p>
+        <p style={{'color': '#000000', 'fontSize': '1.2rem', 'fontWeight': '600'}}></p>
       </div>
 
       {/* Three dot */}
@@ -34,7 +34,7 @@ const DeckRow = ({deckId, deckName, createdDate, isHeader}) => {
         }
         {showMenu && 
                     <div className="popupMenu">
-                        <button onClick={() => navigate('/home/editdecktitle')}>
+                        <button onClick={() => navigate('/home/editdecktitle', { state: { deckId, deckName } })}>
                           Edit Title
                         </button>
                     </div>
