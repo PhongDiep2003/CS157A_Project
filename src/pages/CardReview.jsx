@@ -9,11 +9,13 @@ import 'swiper/css/navigation';
 import axios from 'axios';
 import useFlashcardStorage from '../authStorage/flashcardStorage';
 import userAuthStorage from '../authStorage/userStorage';
+
 const CardReview = () => { 
   const flashcardStorage = useFlashcardStorage(state => state.flashcardStorage)
   const setFlashcardStorage = useFlashcardStorage(state => state.setFlashcardStorage)
   const [isInReviewSession, setIsInReviewSession] = useState(false)
   const userAuth = userAuthStorage(state => state.user)
+
   const startReviewSession = async () => {
     try {
       // Create a new session

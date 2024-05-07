@@ -8,6 +8,14 @@
   box-shadow: 7px 7px 10px 3px #24004628;
   /* margin-left: 150px; */
 }
+
+.trueFalseButton {
+  background-color: #f2f0f0;
+  color: black;
+  margin: 5px 10px;
+}
+
+
 .cardContainer div:nth-of-type(1) {
   flex-grow: 12;
 }
