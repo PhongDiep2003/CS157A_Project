@@ -19,8 +19,11 @@ const Card = ({ frontSide, backSide }) => {
       }
       {!isOnFront && <div className='trueFalseContainer'>
         <h3>Is your guess correct ?</h3>
-        <button className='trueFalseButton'>Yes</button>
-        <button className='trueFalseButton'>No</button>
+        <label className="rocker rocker_small">
+          <input type="checkbox"/>
+          <span className="switch_left">Yes</span>
+          <span className="switch_right">No</span>
+        </label>
       </div>}
       <div className='switchBtnContainer'>
         <button className={isOnFront ? 'switchsidebuttonclicked' : 'switchsidebuttonnotclicked'} onClick={() => setIsOnFront(true)}>Front</button>
